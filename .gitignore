@@ -39,4 +39,4 @@ backend/node_modules/ta-da/
 # package-lock.json
 # yarn.lock
 # Rogue root-level package.json (in case it's not needed)
-package.json
+

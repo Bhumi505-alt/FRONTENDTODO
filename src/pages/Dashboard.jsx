@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Context } from "../main";
@@ -36,9 +35,9 @@ const Dashboard = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="flex justify-center items-center h-[60vh]"
+        className="flex justify-center items-center min-h-[60vh] px-4 text-center"
       >
-        <p className="text-lg font-medium text-gray-600">
+        <p className="text-base sm:text-lg font-medium text-gray-600">
           Please login to view your dashboard.
         </p>
       </motion.div>
@@ -47,7 +46,7 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-[60vh]">
+      <div className="flex justify-center items-center min-h-[60vh]">
         <Loader2 className="animate-spin h-8 w-8 text-blue-600" />
       </div>
     );
@@ -58,29 +57,27 @@ const Dashboard = () => {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-    className="min-h-screen px-4 md:px-12 py-10 bg-gradient-to-br from-purple-200 via-indigo-100 to-blue-200 text-gray-800"
-
-
+      className="min-h-screen px-4 sm:px-6 md:px-12 py-8 sm:py-10 bg-gradient-to-br from-purple-200 via-indigo-100 to-blue-200 text-gray-800"
     >
-      <h1 className="text-3xl font-bold mb-10 text-center text-blue-700">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-10 text-center text-blue-700">
         📊 Weekly Task Summary
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {Object.entries(summary).map(([day, data], index) => (
           <motion.div
             key={day}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.05 }}
-            className="bg-gray-100 border border-gray-300 rounded-2xl p-6 shadow-md hover:shadow-lg transition"
+            className="bg-gray-100 border border-gray-300 rounded-2xl p-5 sm:p-6 shadow-md hover:shadow-lg transition"
           >
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">{day}</h2>
-            <p className="text-base mb-2">
+            <h2 className="text-lg sm:text-xl font-semibold mb-3 text-gray-700">{day}</h2>
+            <p className="text-sm sm:text-base mb-1.5">
               <span className="font-medium text-gray-600">Total Tasks:</span>{" "}
               <span className="font-bold text-blue-700">{data.total}</span>
             </p>
-            <p className="text-base">
+            <p className="text-sm sm:text-base">
               <span className="font-medium text-gray-600">Completed:</span>{" "}
               <span className="font-bold text-green-600">{data.completed}</span>
             </p>

@@ -1,61 +1,42 @@
 import { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import axios from "axios"
-import toast from "react-hot-toast"
+import axios from "axios";
+import toast from "react-hot-toast";
 import { Context } from "../main";
 
 export default function Register() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  const { isAuthenticated, setIsAuthenticated, loader, setloader } = useContext(Context);
 
-  const [name, setName]= useState("")
-    const [email, setEmail]= useState("")
-      const [password, setPassword]= useState("")
-        const {isAuthenticated , setIsAuthenticated, loader, setloader} = useContext(Context);
-      
-
-
-const submitHandler = async (e) => {
-  e.preventDefault();
-  setloader(true);
-  try {
-    const { data } = await axios.post(
-      "http://localhost:4000/users/new",
-      {
-        name,
-        email,
-        password,
-      },
-      {
-        withCredentials: true,
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setloader(true);
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4000/users/new",
+        { name, email, password },
+        { withCredentials: true }
+      );
+      toast.success(data.message);
+      setIsAuthenticated(true);
+    } catch (error) {
+      if (error.response?.status === 409) {
+        toast.error("User already exists! Try logging in.");
+      } else {
+        toast.error("Something went wrong. Please try again.");
       }
-    );
-    toast.success(data.message);
-    setIsAuthenticated(true);
-    setloader(false);
-  } catch (error) {
-    if (error.response && error.response.status === 409) {
-      toast.error("User already exists! Try logging in.");
-    } else {
-      toast.error("Something went wrong. Please try again.");
+      console.error(error);
+      setIsAuthenticated(false);
+    } finally {
+      setloader(false);
     }
-    console.error(error); // for debugging
-    setIsAuthenticated(false);
-  }
-};
+  };
 
+  if (isAuthenticated) return <Navigate to="/" />;
 
-if(isAuthenticated) return <Navigate to="/" />
-
-
-
-
-
-
-
-
-
-
- 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-blue-200 px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
@@ -65,7 +46,9 @@ if(isAuthenticated) return <Navigate to="/" />
         <form className="space-y-5" onSubmit={submitHandler}>
           <div>
             <label className="block text-sm text-gray-600 mb-1">Full Name</label>
-            <input value={name} onChange={(e)=>setName(e.target.value)}
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               type="text"
               required
               placeholder="John Doe"
@@ -75,7 +58,9 @@ if(isAuthenticated) return <Navigate to="/" />
 
           <div>
             <label className="block text-sm text-gray-600 mb-1">Email</label>
-            <input value={email} onChange={(e)=>setEmail(e.target.value)}
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               required
               placeholder="you@example.com"
@@ -85,7 +70,9 @@ if(isAuthenticated) return <Navigate to="/" />
 
           <div>
             <label className="block text-sm text-gray-600 mb-1">Password</label>
-            <input value={password} onChange={(e)=>setPassword(e.target.value)}
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               required
               placeholder="••••••••"
@@ -93,11 +80,16 @@ if(isAuthenticated) return <Navigate to="/" />
             />
           </div>
 
-          <button disabled={loader}
+          <button
+            disabled={loader}
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl transition"
+            className={`w-full text-white font-semibold py-2 rounded-xl transition ${
+              loader
+                ? "bg-blue-300 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
           >
-            Register
+            {loader ? "Registering..." : "Register"}
           </button>
         </form>
 

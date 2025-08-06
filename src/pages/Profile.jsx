@@ -6,18 +6,17 @@ const Profile = () => {
   const { isAuthenticated, loader, user } = useContext(Context);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 relative overflow-hidden px-4 sm:px-6 lg:px-8">
 
-      
-      <div className="absolute w-[700px] h-[700px] bg-pink-400 opacity-30 rounded-full blur-[200px] -top-40 -right-40 z-0" />
+      <div className="absolute w-[500px] h-[500px] sm:w-[600px] sm:h-[600px] md:w-[700px] md:h-[700px] bg-pink-400 opacity-30 rounded-full blur-[200px] -top-20 -right-20 sm:-top-32 sm:-right-32 md:-top-40 md:-right-40 z-0" />
 
       <motion.div
-        className="relative z-10 bg-white/30 backdrop-blur-md p-10 rounded-3xl shadow-xl w-full max-w-lg border border-white/40"
+        className="relative z-10 bg-white/30 backdrop-blur-md p-6 sm:p-8 md:p-10 rounded-2xl md:rounded-3xl shadow-xl w-full max-w-md sm:max-w-lg border border-white/40"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-4">
           Your <span className="text-blue-600">Profile</span>
         </h2>
 
@@ -25,7 +24,7 @@ const Profile = () => {
           <p className="text-center text-gray-600 mt-4">Loading user data...</p>
         ) : (
           <div className="flex flex-col gap-6 mt-6 text-gray-800">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
               <img
                 src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${user.name || 'User'}`}
                 alt="avatar"
@@ -33,17 +32,18 @@ const Profile = () => {
               />
               <div>
                 <h3 className="text-xl font-semibold">{user.name}</h3>
-                <p className="text-gray-600">{user.email}</p>
+                <p className="text-gray-600 break-all">{user.email}</p>
               </div>
             </div>
 
-            <div className="border-t border-gray-300 pt-4">
+            <div className="border-t border-gray-300 pt-4 space-y-2 text-sm sm:text-base">
               <p>
                 <span className="font-semibold">Joined On:</span>{' '}
                 {new Date(user.createdAt).toLocaleDateString()}
               </p>
               <p>
-                <span className="font-semibold">User ID:</span> {user._id}
+                <span className="font-semibold">User ID:</span>{' '}
+                <span className="break-all">{user._id}</span>
               </p>
             </div>
           </div>

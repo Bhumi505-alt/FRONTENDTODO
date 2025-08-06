@@ -1,13 +1,14 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../main";
 import axios from "axios";
+import { Menu, X } from "lucide-react"; // Add this if using lucide for icons
 
 const navItems = [
   { name: "Home", path: "/" },
   { name: "Dashboard", path: "/dashboard" },
   { name: "Profile", path: "/profile" },
-   { name: "Productivity", path: "/productivity " },
+  { name: "Productivity", path: "/productivity" },
 ];
 
 export default function Navbar() {
@@ -15,6 +16,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { isAuthenticated, setIsAuthenticated, loader, setloader, setUser } =
     useContext(Context);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -34,15 +37,21 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow-lg rounded-b-3xl px-8 py-4 w-full border-b border-gray-200">
+    <nav className="bg-white shadow-lg rounded-b-3xl px-6 py-4 w-full border-b border-gray-200">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-    
         <div className="text-3xl font-bold text-gray-800 tracking-tight">
           <span className="text-blue-600">DOKU</span>•DO
         </div>
 
-       
-        <ul className="flex gap-10 text-[17px] font-medium items-center">
+        {/* Hamburger Icon for Mobile */}
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex gap-10 text-[17px] font-medium items-center">
           {navItems.map((item) => (
             <li key={item.name}>
               <Link
@@ -83,6 +92,46 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isOpen && (
+        <div className="md:hidden mt-4 px-2 space-y-2 text-[17px] font-medium">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              onClick={() => setIsOpen(false)}
+              className={`block px-4 py-2 rounded-md transition-all duration-300 ${
+                location.pathname === item.path
+                  ? "bg-blue-100 text-blue-600"
+                  : "text-gray-700 hover:bg-gray-100"
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+
+          {isAuthenticated ? (
+            <button
+              disabled={loader}
+              onClick={handleLogout}
+              className="w-full text-left px-4 py-2 text-white bg-red-600 hover:bg-red-700 rounded-md transition-all duration-300 shadow-sm"
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                navigate("/login");
+              }}
+              className="w-full text-left px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-all duration-300 shadow-sm"
+            >
+              Login
+            </button>
+          )}
+        </div>
+      )}
     </nav>
   );
 }

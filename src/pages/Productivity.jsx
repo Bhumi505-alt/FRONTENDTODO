@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -87,17 +86,17 @@ const techniques = [
 
 const Productivity = () => {
   return (
-    <div className="min-h-screen px-4 md:px-12 py-10 bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-600 text-white">
+    <div className="min-h-screen px-4 sm:px-6 md:px-12 py-10 bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-600 text-white">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-4xl font-bold text-center mb-12"
+        className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12"
       >
         🚀 Productivity Boosters
       </motion.h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {techniques.map((technique, index) => (
           <motion.a
             key={index}
@@ -107,27 +106,30 @@ const Productivity = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.05 }}
-            className="bg-white/10 hover:bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl p-6 cursor-pointer transition-all duration-300 shadow-lg"
+            className="bg-white/10 hover:bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl p-5 sm:p-6 cursor-pointer transition-all duration-300 shadow-lg"
           >
-            <h2 className="text-2xl font-semibold mb-2">{technique.title}</h2>
-            <p className="text-sm">{technique.description}</p>
-            <p className="mt-2 text-sm text-blue-200 underline">
+            <h2 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">{technique.title}</h2>
+            <p className="text-xs sm:text-sm">{technique.description}</p>
+            <p className="mt-2 text-xs sm:text-sm text-blue-200 underline">
               Learn more
             </p>
           </motion.a>
         ))}
       </div>
 
-      <footer className="mt-16 text-center text-sm text-white/90 border-t border-white/20 pt-6">
+      <footer className="mt-12 sm:mt-16 text-center text-sm text-white/90 border-t border-white/20 pt-6 px-4">
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="max-w-xl mx-auto"
+          className="max-w-xl mx-auto text-xs sm:text-sm"
         >
-          <strong>Note from the maker:</strong> This app was built <span className="text-yellow-300 font-medium"></span> to help people manage tasks, build consistency, and stay motivated. The goal is to offer a simple, clean interface with impactful features to boost your productivity daily.
+          <strong>Note from the maker:</strong> This app was built{" "}
+          <span className="text-yellow-300 font-medium"></span> to help people manage tasks, build consistency,
+          and stay motivated. The goal is to offer a simple, clean interface with impactful features to boost
+          your productivity daily.
         </motion.p>
-        <p className="mt-4 text-white/70">
+        <p className="mt-4 text-white/70 text-xs sm:text-sm">
           © {new Date().getFullYear()} Bhomik Khanna. All rights reserved. More features coming soon ✨
         </p>
       </footer>

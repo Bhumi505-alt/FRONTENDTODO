@@ -10,14 +10,15 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "./main";
 import axios from "axios";
 import Productivity from "./pages/Productivity";
+import axiosInstance from "./lib/axios";
 
 function App() {
   const { setUser, setIsAuthenticated } = useContext(Context);
   const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/users/me", {
+    axiosInstance
+      .get("/users/me", {
         withCredentials: true,
       })
       .then((res) => {

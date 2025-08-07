@@ -4,6 +4,7 @@ import { Context } from "../main";
 import { toast } from "react-hot-toast";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
+import axiosInstance from "../lib/axios";
 
 const Dashboard = () => {
   const { isAuthenticated } = useContext(Context);
@@ -13,7 +14,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchWeeklyData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/tasks/dashboard/weekly", {
+        const response = await axiosInstance.get("/tasks/dashboard/weekly", {
           withCredentials: true,
         });
         setSummary(response.data.summary);

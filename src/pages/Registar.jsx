@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../main";
+import axiosInstance from "../lib/axios";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -15,8 +16,8 @@ export default function Register() {
     e.preventDefault();
     setloader(true);
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/users/new",
+      const { data } = await axiosInstance.post(
+        "/users/new",
         { name, email, password },
         { withCredentials: true }
       );

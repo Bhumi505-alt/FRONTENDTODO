@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { Context } from "../main";
 import axios from "axios";
 import { Menu, X } from "lucide-react"; // Add this if using lucide for icons
+import axiosInstance from "../lib/axios";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -22,7 +23,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       setloader(true);
-      await axios.get("http://localhost:4000/users/logout", {
+      await axiosInstance.get("/users/logout", {
         withCredentials: true,
       });
 

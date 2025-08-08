@@ -5,12 +5,14 @@ import Registar from "./pages/Registar";
 import Navbar from "./Compos/navbar";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+
 import { Toaster } from "react-hot-toast";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "./main";
 import axios from "axios";
 import Productivity from "./pages/Productivity";
 import axiosInstance from "./lib/axios";
+import AiDoku from "./pages/AiDoku";
 
 function App() {
   const { setUser, setIsAuthenticated } = useContext(Context);
@@ -46,6 +48,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
             <Route path="/productivity" element={<Productivity />} />
+             <Route path="/dokuai" element={<AiDoku />} />
+             
         </Routes>
         <Toaster />
       </Router>

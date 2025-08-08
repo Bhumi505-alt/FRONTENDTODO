@@ -10,6 +10,8 @@ const navItems = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Profile", path: "/profile" },
   { name: "Productivity", path: "/productivity" },
+  {name: "DokuAi" , path: "/dokuai"}
+  
 ];
 
 export default function Navbar() {

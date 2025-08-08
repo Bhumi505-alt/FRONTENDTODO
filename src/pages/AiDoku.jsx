@@ -78,6 +78,8 @@ const AiDoku = () => {
             messages.length === 0 && (
               <div className='text-center text-gray-400 mt-20'>
                 Start with DokuAi and get started with productivity
+                <br />
+                To get started with DokuAI please signup at puter.com first 
               </div>
             )
           }

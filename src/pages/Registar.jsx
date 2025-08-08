@@ -42,7 +42,7 @@ export default function Register() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-blue-200 px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-2">Create your account</h2>
-        <p className="text-sm text-gray-500 text-center mb-6">Join TA•DA and organize your day ✨</p>
+        <p className="text-sm text-gray-500 text-center mb-6">Join DOKU•DO and organize your day ✨</p>
 
         <form className="space-y-5" onSubmit={submitHandler}>
           <div>
